@@ -23,4 +23,6 @@ class EmmaLogger {
     }
 }
 
-module.exports = EmmaLogger;
+const c = new EmmaLogger();
+
+module.exports = c;

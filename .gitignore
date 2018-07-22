@@ -1,2 +1,3 @@
 .env
 bot/node_modules
+bot/commands/__example.disabled.js
