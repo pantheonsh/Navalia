@@ -4,7 +4,7 @@ const Discord = require("discord.js");
 const colors = require("chalk").default;
 
 // Configurar variáveis de ambiente
-require("dotenv").config({ path: path.resolve(__dirname, "../.env") });
+try { require("dotenv").config({ path: path.resolve(__dirname, "../.env") }); } catch (ex) { }
 
 // Módulo de logging da Emma.
 const console = require("./includes/emmalogger");
