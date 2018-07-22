@@ -1,23 +1,26 @@
-/*
-    Módulo de logging da Emma.
-    
-    Substitui funções globais.
-*/
-
-const chalk = require("chalk").default;
+const colors = require("chalk").default;
 const moment = require("moment");
 
-// fazer "backup" das funções originais
-const clog = console.log;
-const cerr = console.error;
+class EmmaLogger {
+    constructor () {
+        this.console = global.console;
+    }
 
-const emmaConsole = {};
+    getTime () {
+        return moment().format("HH:mm:ss");
+    }
 
-emmaConsole.log = (...params) => clog( chalk.gray( moment().format("HH:mm:ss"), "INFO " ), ...params );
-emmaConsole.debug = (...params) => clog( chalk.green( moment().format("HH:mm:ss"), "DEBUG" ), ...params );
-emmaConsole.warn = (...params) => cerr( chalk.yellow( moment().format("HH:mm:ss"), "WARN " ), ...params );
-emmaConsole.error = (...params) => cerr( chalk.red( moment().format("HH:mm:ss"), "ERROR" ), ...params );
+    log (...params) {
+        this.console.log(colors.gray(this.getTime(), "INFO  "), ...params);
+    }
 
-global.console = Object.assign(global.console, emmaConsole);
+    error (...params) {
+        this.console.error(colors.red(this.getTime(), "ERROR "), ...params);
+    }
 
-module.exports = global.console;
+    debug (...params) {
+        this.console.log(colors.gray(this.getTime(), "DEBUG "), ...params);
+    }
+}
+
+module.exports = EmmaLogger;
