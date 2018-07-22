@@ -1,6 +1,9 @@
 {
     "name": "emma_bot",
     "author": "pantheonsh",
+    "scripts": {
+        "start": "cd bot && node index.js"
+    },
     "dependencies": {
         "chalk": "^2.4.1",
         "discord.js": "^11.3.2",
