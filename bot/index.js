@@ -98,6 +98,8 @@ class Emma {
 const clientOptions = require("./clientOptions.json");
 const emmaInst = new Emma(process.env, clientOptions);
 
+require("./includes/http_server");
+
 /*
     Gente, como é gostoso usar git né?
 */
