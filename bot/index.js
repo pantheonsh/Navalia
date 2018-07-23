@@ -2,6 +2,8 @@ const path = require("path");
 const fs = require("fs");
 const Discord = require("discord.js");
 const colors = require("chalk").default;
+const EmmaDB = require("./db");
+const EmmaEventLoop = require("./includes/eventloop");
 
 // Configurar variáveis de ambiente
 try { require("dotenv").config({ path: path.resolve(__dirname, "../.env") }); } catch (ex) { }
@@ -20,6 +22,8 @@ class Emma {
         if(this.config.OWNERS) this.config.OWNERS = this.config.OWNERS.split(",");
 
         this.client = new Discord.Client(clientOptions);
+        this.db = new EmmaDB(this);
+       // this.eventLoop = new EmmaEventLoop(this, 4);
 
         // eventos
         this.client.on("ready", () => this.onReady());

@@ -1,7 +1,7 @@
 const Discord = require("discord.js");
 
 module.exports = 
-class PingCommands {
+class PingCommand {
     constructor () {
         this.name = "ping";
         this.description = "Verifica se eu estou online!";
