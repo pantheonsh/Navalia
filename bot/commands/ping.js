@@ -16,12 +16,12 @@ class PingCommand {
 
     async exec (Emma, client, msg, args) {
         const time1 = Date.now();
-        const m = await msg.reply("<:holdit:470632153529450507>!");
+        const m = await msg.reply("Aguarde...");
         const time2 = Date.now();
 
         const embed = new Discord.RichEmbed();
         embed.setColor(0x36393F);
         embed.addField(`⏰ Ping daqui: ${time2 - time1}ms`, `Gateway: ${Math.floor(client.ping)}ms`);
-        m.edit(embed);
+        m.edit({ embed });
     }
 }
