@@ -1,11 +1,14 @@
 const Discord = require("discord.js");
+const moment = require("moment");
+const UtilFuncs = require("../includes/funcs");
 
+moment.locale("pt-br");
 
 module.exports = 
 class SayCommand {
     constructor () {
         this.name = "say";
-        this.description = "Faça eu falar algo.";
+        this.description = "Repete algo. Variáveis: $NOW";
         this.example = "say Olá mundo!"
         this.usage = "say Texto";
         this.aliases = ["falar"];
@@ -16,7 +19,10 @@ class SayCommand {
     }
 
     async exec (Emma, client, msg, args) {
-        var texto = args.join(' ')
-        msg.channel.send(":loudspeaker: | "+ texto)
+        let texto = args.join(" ");
+
+        texto = UtilFuncs.bulkReplaceAll(texto, { "$NOW": moment().format("HH:mm:ss") });
+
+        msg.channel.send(`<@${msg.author.id}> ${texto}`);
     }
 }
