@@ -14,7 +14,7 @@ class PingCommand {
         this.user_permissions = []; // permissões que o usuário precisa ter
     }
 
-    async exec (Emma, client, msg, args) {
+    async exec (Navalia, client, msg, args) {
         const time1 = Date.now();
         const m = await msg.reply("Aguarde...");
         const time2 = Date.now();

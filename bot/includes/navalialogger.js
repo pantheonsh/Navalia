@@ -1,7 +1,7 @@
 const colors = require("chalk").default;
 const moment = require("moment");
 
-class EmmaLogger {
+class NavaliaLogger {
     constructor () {
         this.console = global.console;
     }
@@ -23,6 +23,6 @@ class EmmaLogger {
     }
 }
 
-const c = new EmmaLogger();
+const c = new NavaliaLogger();
 
 module.exports = c;

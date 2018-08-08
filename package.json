@@ -1,5 +1,5 @@
 {
-    "name": "emma_bot",
+    "name": "navalia_bot",
     "author": "pantheonsh",
     "scripts": {
         "start": "cd bot && node index.js"

@@ -4,11 +4,11 @@ class EventLoop extends events.EventEmitter {
     /**
      * @param {Number} interval Em segundos, frequência para executar todas as tarefas.
      */
-    constructor (Emma, interval) {
+    constructor (Navalia, interval) {
         super();
 
         this.frequency = interval * 1000;
-        this.Emma = Emma;
+        this.Navalia = Navalia;
         this.interval = setInterval(() => this.processTasks(), this.frequency);
     }
 

@@ -1,10 +1,10 @@
 const mongoose = require("mongoose");
-const console = require("./includes/emmalogger");
+const console = require("./includes/navalialogger");
 
 class DB {
-    constructor (Emma) {
-        console.log(Emma.config.MONGODB_URL)
-        mongoose.connect(Emma.config.MONGODB_URL)
+    constructor (Navalia) {
+        console.log(Navalia.config.MONGODB_URL)
+        mongoose.connect(Navalia.config.MONGODB_URL)
             .then(() => this.onConnect())
             .catch(err => this.onConnectionError(err));
 

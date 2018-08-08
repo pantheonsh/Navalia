@@ -18,7 +18,7 @@ class SayCommand {
         this.user_permissions = []; // permissões que o usuário precisa ter
     }
 
-    async exec (Emma, client, msg, args) {
+    async exec (Navalia, client, msg, args) {
         let texto = args.join(" ");
 
         texto = UtilFuncs.bulkReplaceAll(texto, { "$NOW": moment().format("HH:mm:ss") });

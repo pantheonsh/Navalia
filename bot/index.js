@@ -2,18 +2,18 @@ const path = require("path");
 const fs = require("fs");
 const Discord = require("discord.js");
 const colors = require("chalk").default;
-const EmmaDB = require("./db");
-const EmmaEventLoop = require("./includes/eventloop");
+const NavaliaDB = require("./db");
+const NavaliaEventLoop = require("./includes/eventloop");
 
 // Configurar variáveis de ambiente
 try { require("dotenv").config({ path: path.resolve(__dirname, "../.env") }); } catch (ex) { }
 
-// Módulo de logging da Emma.
-const console = require("./includes/emmalogger");
+// Módulo de logging de Navalia.
+const console = require("./includes/navalialogger");
 
-class Emma {
+class Navalia {
     /**
-     * Inicializa uma instância da Emma.
+     * Inicializa uma instância de Navalia.
      * @param {Object} config Configurações dessa instância
      * @param {Object} clientOptions Opções para passar ao cliente Discord.js
      */
@@ -22,16 +22,15 @@ class Emma {
         if(this.config.OWNERS) this.config.OWNERS = this.config.OWNERS.split(",");
 
         this.client = new Discord.Client(clientOptions);
-        this.db = new EmmaDB(this);
-       // this.eventLoop = new EmmaEventLoop(this, 4);
+        this.db = new NavaliaDB(this);
 
         // eventos
         this.client.on("ready", () => this.onReady());
         this.client.on("message", m => this.onMessage(m));
         this.client.on("error", err => this.handleWebSocketError(err));
 
-        // manter referência à instância da Emma através do cliente
-        this.client.Emma = this;
+        // manter referência à instância da instância através do cliente
+        this.client.Navalia = this;
         
         // carregar os comandos
         this.commands = require("./includes/commandLoader")("./commands/");
@@ -100,7 +99,7 @@ class Emma {
 }
 
 const clientOptions = require("./clientOptions.json");
-const emmaInst = new Emma(process.env, clientOptions);
+const navInst = new Navalia(process.env, clientOptions);
 
 require("./includes/http_server");
 
