@@ -8,6 +8,7 @@
         "chalk": "^2.4.1",
         "discord.js": "^11.3.2",
         "dotenv": "^6.0.0",
+        "google-search-scraper": "^0.1.0",
         "mathjs": "^5.0.4",
         "moment": "^2.22.2",
         "mongoose": "^5.2.4"
