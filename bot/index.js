@@ -35,7 +35,25 @@ class Navalia {
         // carregar os comandos
         this.commands = require("./includes/commandLoader")("./commands/");
 
-        this.client.login(config.DISCORD_TOKEN);
+        this.preLogin().then(() =>
+            this.client.login(config.DISCORD_TOKEN).then(() => 
+                this.postLogin()));
+    }
+
+    /**
+     * Executado antes do bot fazer login pela primeira vez.
+     */
+    preLogin () {
+        // ... ainda não utilizado
+
+        return true;
+    }
+
+    /**
+     * Executado após o primeiro login.
+     */
+    postLogin () {
+        this.setStatusText(`☄️ -ajuda`, true);
     }
 
     /**
@@ -62,6 +80,21 @@ class Navalia {
         console.debug(`${colors.green(cmd)} ${colors.bgBlack.white(args.join(" "))}`);
 
         this.handleCommand(msg, cmd, args);
+    }
+
+    /**
+     * Açúcar para a sintaxe de alterar os status.
+     * @param {String} message 
+     * @param {Boolean} purple Deixar roxo?
+     */
+    async setStatusText (message, purple) {
+        return await 
+            this.client.user.setPresence({ 
+                game: { 
+                    name: message, 
+                    url: purple ? "https://www.twitch.tv/funkyblackcat" : null 
+                } 
+            });
     }
 
     /**
