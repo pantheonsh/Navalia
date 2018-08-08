@@ -34,19 +34,9 @@ class Navalia {
         
         // carregar os comandos
         this.commands = require("./includes/commandLoader")("./commands/");
-
-        this.preLogin().then(() =>
-            this.client.login(config.DISCORD_TOKEN).then(() => 
-                this.postLogin()));
-    }
-
-    /**
-     * Executado antes do bot fazer login pela primeira vez.
-     */
-    preLogin () {
-        // ... ainda não utilizado
-
-        return true;
+  
+        this.client.login(config.DISCORD_TOKEN).then(() => 
+            this.postLogin());
     }
 
     /**
