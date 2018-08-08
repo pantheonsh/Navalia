@@ -8,7 +8,7 @@ class GoogleCommand {
         this.description = "Faz uma pesquisa no Google";
         this.example = "google 4shared"
         this.usage = "google <pesquisa>";
-        this.aliases = [];
+        this.aliases = ["g"];
         this.user_must_be_owner = false; // somente os administradores do bot podem usar?
         this.guild_only = false; // só pode ser executado em uma guild?
         this.bot_permissions = []; // permissões que o bot precisa ter
