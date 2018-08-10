@@ -31,12 +31,31 @@ class Navalia {
 
         // manter referência à instância da instância através do cliente
         this.client.Navalia = this;
-        
+
         // carregar os comandos
         this.commands = require("./includes/commandLoader")("./commands/");
   
         this.client.login(config.DISCORD_TOKEN).then(() => 
             this.postLogin());
+
+        this.client.on("message", async msg => {
+            try {
+                if(msg.channel.id === "359313557667577857") {
+                    if(msg.content.startsWith(".")) {
+                        let n = (parseInt(msg.content.charAt(1)) || 2);
+                        if(n < 1) n = 2;
+                        if(n > 9) n = 9;
+                        const emojis = ["1⃣", "2⃣", "3⃣", "4⃣", "5⃣", "6⃣", "7⃣", "8⃣", "9⃣"].slice(0, n);
+                        for(const emoji of emojis) {
+                            await msg.react(emoji);
+                        }
+                    } else {
+                        await msg.react("👍");
+                        await msg.react("👎");
+                    }
+                }
+            } catch(ex) {}
+        });
     }
 
     /**
@@ -126,6 +145,4 @@ const navInst = new Navalia(process.env, clientOptions);
 
 require("./includes/http_server");
 
-/*
-    Gente, como é gostoso usar git né?
-*/
+module.exports = { Navalia }
