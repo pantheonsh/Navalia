@@ -24,6 +24,6 @@ class PingCommand {
         const embed = new Discord.RichEmbed();
         embed.setColor(0x36393F);
         embed.setDescription(str);
-        m.edit({ embed });
+        m.send({ embed });
     }
 }
