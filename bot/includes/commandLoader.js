@@ -9,6 +9,7 @@ const path = require("path");
 function commandLoader (commandsPath) {
     const Commands = new Map();
     Commands.aliases = [];
+    Commands.notaliases = [];
     const commandFiles = fs.readdirSync(commandsPath);
 
     commandFiles.forEach(commandFile => {
@@ -18,6 +19,8 @@ function commandLoader (commandsPath) {
         const command = new (require(commandPath))();
 
         Commands.set(command.name, command);
+        Commands.notaliases.push(command);
+        
         // aliases são comandos também
         command.aliases.forEach(aliasName => {
             Commands.aliases.push(aliasName);

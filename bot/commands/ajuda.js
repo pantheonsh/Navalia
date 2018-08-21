@@ -17,11 +17,12 @@ class PingCommand {
     async exec (Navalia, client, msg, args) {
         let str = "";
 
-        Navalia.commands.forEach(command => {
+        Navalia.commands.notaliases.forEach(command => {
             str += `\`${command.name}\` `;
         });
 
         const embed = new Discord.RichEmbed();
+        embed.setTitle("Comandos");
         embed.setColor(0x36393F);
         embed.setDescription(str);
         msg.reply({ embed });
