@@ -18,7 +18,7 @@ class PingCommand {
         let str = "";
 
         Navalia.commands.forEach(command => {
-            str += `\`${command.name}\``;
+            str += `\`${command.name}\` `;
         });
 
         const embed = new Discord.RichEmbed();
