@@ -1,7 +1,7 @@
 const Discord = require("discord.js");
 
 module.exports = 
-class ExampleCommand {
+class EvalCommand {
     constructor () {
         this.name = "eval";
         this.description = "Executa JS arbitrário.";
