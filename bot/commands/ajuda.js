@@ -1,7 +1,7 @@
 const Discord = require("discord.js");
 
 module.exports = 
-class PingCommand {
+class AjudaCommand {
     constructor () {
         this.name = "ajuda";
         this.description = "Mostra todos os meus comandos.";

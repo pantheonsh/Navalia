@@ -1,7 +1,7 @@
 const Discord = require("discord.js");
 
 module.exports = 
-class PingCommand {
+class GitHubCommand {
     constructor () {
         this.name = "github";
         this.description = "Um link para ver meu código e contribuir.";
