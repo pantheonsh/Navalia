@@ -15,6 +15,6 @@ class GitHubCommand {
     }
 
     async exec (Navalia, client, msg, args) {
-        m.edit(`https://github.com/pantheonsh/Navalia`);
+        msg.reply(`https://github.com/pantheonsh/Navalia`);
     }
 }
