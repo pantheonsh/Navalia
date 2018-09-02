@@ -1,5 +1,16 @@
 class UtilFuncs {
     /**
+     * Previne menções adicionando um caractere invisível após o @
+     * @param {String} str
+     */
+    preventMentions (str) {
+        if (typeof(str) === "string")
+            return str.replace(/`/g, "`" + String.fromCharCode(8203)).replace(/@/g, "@" + String.fromCharCode(8203));
+        else
+            return str;
+    }
+
+    /**
      * @param {String} str 
      */
     escapeRegExp (str) {
