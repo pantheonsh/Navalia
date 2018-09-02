@@ -117,13 +117,34 @@ class Navalia {
         if(!this.commands.has(commandName)) return;
 
         const cmd = this.commands.get(commandName);
+        const errorEmbed = new Discord.RichEmbed();
+        errorEmbed.setColor(0xEE0000);
 
         /* Verificar permissões */
-        if(cmd.user_must_be_owner && !this.config.OWNERS.includes(msg.author.id)) return;
-        if(cmd.guild_only && !msg.guild) return;
-        if(msg.guild && !msg.guild.available) return;
-        if(msg.guild && !msg.member.hasPermission(cmd.user_permissions)) return;
-        if(msg.guild && !msg.guild.me.hasPermission(cmd.bot_permissions)) return;
+        if(cmd.user_must_be_owner && !this.config.OWNERS.includes(msg.author.id)) {
+            /* Usuário não é dono do bot */
+            errorEmbed.setDescription(`${this.emojis.error} Você não tem as permissões necessárias para executar esse comando. O comando é restrito.`);
+            return msg.reply({ embed: errorEmbed });
+        } else if(cmd.guild_only && !msg.guild) {
+            /* Não está em uma guild */
+            errorEmbed.setDescription(`${this.emojis.error} Esse comando só pode ser usado em um servidor.`);
+            return msg.reply({ embed: errorEmbed });
+        } else if(msg.guild && !msg.guild.available) {
+            /* Guild não disponível, ignorar */
+            return;
+        } else if(msg.guild && !msg.member.hasPermission(cmd.user_permissions)) {
+            /* Usuário não tem as permissões necessárias */
+            const missingPermissions = cmd.user_permissions.filter(perm => !msg.member.hasPermission(perm));
+
+            errorEmbed.setDescription(`${this.emojis.error} Você não tem todas as permissões necessárias para executar esse comando (**${missingPermissions.join(", ") || "Wat."}**)`);
+            return msg.reply({ embed: errorEmbed });
+        } else if(msg.guild && !msg.guild.me.hasPermission(cmd.bot_permissions)) {
+            /* Bot não tem as permissões necessárias */
+            const missingPermissions = cmd.bot_permissions.filter(perm => !msg.guild.me.hasPermission(perm));
+
+            errorEmbed.setDescription(`${this.emojis.error} Eu não tenho todas as permissões necessárias para executar esse comando (**${missingPermissions.join(", ") || "Wat."}**). Peça para alguém me dar, por favor!`);
+            return msg.reply({ embed: errorEmbed });
+        }
 
         cmd.exec(this, this.client, msg, args);
     }

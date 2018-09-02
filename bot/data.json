@@ -1,6 +1,40 @@
 {
     "disabledEvents": [ "TYPING_START", "VOICE_STATE_UPDATE", "VOICE_SERVER_UPDATE" ],
     "emojis": {
-        
+        "error": "<:error:485901432243879957>"
+    },
+    "permissions": {
+        "ADMINISTRATOR": "Administrador",
+        "CREATE_INSTANT_INVITE": "Criar convites instantâneos",
+        "KICK_MEMBERS": "Expulsar membros",
+        "BAN_MEMBERS": "Banir membros",
+        "MANAGE_CHANNELS": "Gerenciar canais",
+        "MANAGE_GUILD": "Gerenciar servidor",
+        "ADD_REACTIONS": "Adicionar reações",
+        "VIEW_AUDIT_LOG": "Ver audit log",
+        "PRIORITY_SPEAKER": "Prioridade ao falar",
+        "VIEW_CHANNEL": "Ver canal",
+        "READ_MESSAGES": "Ler mensagens",
+        "SEND_MESSAGES": "Enviar mensagens",
+        "SEND_TTS_MESSAGES": "Enviar mensagens TTS",
+        "MANAGE_MESSAGES": "Gerenciar mensagens",
+        "EMBED_LINKS": "Incorporar links",
+        "ATTACH_FILES": "Incorporar arquivos",
+        "READ_MESSAGE_HISTORY": "Ler mensagens antigas",
+        "MENTION_EVERYONE": "Mencionar @todomundo",
+        "USE_EXTERNAL_EMOJIS": "Usar emojis de outros servidores",
+        "EXTERNAL_EMOJIS": "Usar emojis de outros servidores",
+        "CONNECT": "Entrar no canal de voz",
+        "SPEAK": "Falar",
+        "MUTE_MEMBERS": "Mutar membros",
+        "DEAFEN_MEMBERS": "Ensurdecer membros",
+        "MOVE_MEMBERS": "Mover membros entre canais de voz",
+        "USE_VAD": "Usar Voice Activity Detection",
+        "CHANGE_NICKNAME": "Mudar o próprio nickname",
+        "MANAGE_NICKNAMES": "Mudar nicknames dos outros",
+        "MANAGE_ROLES": "Alterar cargos",
+        "MANAGE_ROLES_OR_PERMISSIONS": "Alterar cargos ou permissões",
+        "MANAGE_WEBHOOKS": "Gerenciar webhooks",
+        "MANAGE_EMOJIS": "Gerenciar emojis"
     }
 }
