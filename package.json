@@ -5,6 +5,7 @@
         "start": "cd bot && node index.js"
     },
     "dependencies": {
+        "better-sqlite3": "^4.1.4",
         "chalk": "^2.4.1",
         "discord.js": "^11.3.2",
         "dotenv": "^6.0.0",

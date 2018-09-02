@@ -2,7 +2,7 @@ const path = require("path");
 const fs = require("fs");
 const Discord = require("discord.js");
 const colors = require("chalk").default;
-const NavaliaDB = require("./db");
+const NavDB = require("./db");
 const NavaliaEventLoop = require("./includes/eventloop");
 
 // Configurar variáveis de ambiente
@@ -15,14 +15,15 @@ class Navalia {
     /**
      * Inicializa uma instância de Navalia.
      * @param {Object} config Configurações dessa instância
-     * @param {Object} clientOptions Opções para passar ao cliente Discord.js
+     * @param {Object} clientData Opções para passar ao cliente Discord.js
      */
-    constructor (config, clientOptions) {
+    constructor (config, clientData) {
         this.config = config;
         if(this.config.OWNERS) this.config.OWNERS = this.config.OWNERS.split(",");
 
-        this.client = new Discord.Client(clientOptions);
-        this.db = new NavaliaDB(this);
+        this.client = new Discord.Client(clientData);
+        this.emojis = clientData.emojis;
+        this.db = new NavDB(path.join("..", config.SQLITE_FILENAME || "db.sqlite"));
 
         // eventos
         this.client.on("ready", () => this.onReady());
@@ -34,7 +35,7 @@ class Navalia {
 
         // carregar os comandos
         this.commands = require("./includes/commandLoader")("./commands/");
-  
+        
         this.client.login(config.DISCORD_TOKEN).then(() => 
             this.postLogin());
 
@@ -140,8 +141,8 @@ class Navalia {
     }
 }
 
-const clientOptions = require("./clientOptions.json");
-const navInst = new Navalia(process.env, clientOptions);
+const clientData = require("./data.json");
+const navInst = new Navalia(process.env, clientData);
 
 require("./includes/http_server");
 

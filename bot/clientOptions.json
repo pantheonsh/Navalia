@@ -1,3 +1,0 @@
-{
-    "disabledEvents": [ "TYPING_START", "VOICE_STATE_UPDATE", "VOICE_SERVER_UPDATE" ]
-}
