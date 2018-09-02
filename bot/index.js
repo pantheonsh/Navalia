@@ -62,7 +62,7 @@ class Navalia {
      * Executado após o primeiro login.
      */
     postLogin () {
-        this.setStatusText(`☄️ -ajuda`, true);
+        this.setStatusText(`-ajuda`, true);
     }
 
     /**
