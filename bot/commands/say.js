@@ -23,7 +23,10 @@ class SayCommand {
 
         texto = UtilFuncs.bulkReplaceAll(texto, { "$NOW": moment().format("HH:mm:ss") });
         texto = UtilFuncs.preventMentions(texto);
-        
+
         msg.channel.send(`<@${msg.author.id}> ${texto}`);
+
+        if(msg.deletable)
+            msg.delete();
     }
 }
