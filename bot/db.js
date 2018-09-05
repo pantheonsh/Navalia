@@ -11,8 +11,15 @@ class NavDB extends SQLite {
 
         // Inicialização
         this.prepare(`CREATE TABLE IF NOT EXISTS "usuarios" (
-            "id"	INTEGER NOT NULL PRIMARY KEY UNIQUE,
+            "id"	TEXT NOT NULL PRIMARY KEY UNIQUE,
             "xp"	INTEGER
+        );`).run();
+
+        this.prepare(`CREATE TABLE IF NOT EXISTS "guild_xp" (
+            "guild_id"	TEXT NOT NULL,
+            "user_id"   TEXT NOT NULL,
+            "xp"	    INTEGER,
+            UNIQUE (guild_id, user_id)
         );`).run();
     }
 }

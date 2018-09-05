@@ -1,8 +1,11 @@
+require("./includes/polyfills");
+
 const path = require("path");
 const fs = require("fs");
 const Discord = require("discord.js");
 const colors = require("chalk").default;
 const NavDB = require("./db");
+const NavXPSystem = require("./includes/xp");
 const NavaliaEventLoop = require("./includes/eventloop");
 
 // Configurar variáveis de ambiente
@@ -19,6 +22,8 @@ class Navalia {
      */
     constructor (config, clientData) {
         this.config = config;
+        this.startedAt = Date.now();
+
         if(this.config.OWNERS) this.config.OWNERS = this.config.OWNERS.split(",");
 
         this.client = new Discord.Client(clientData);
@@ -36,6 +41,9 @@ class Navalia {
         // carregar os comandos
         this.commands = require("./includes/commandLoader")("./commands/");
         
+        this.modules = {};
+        this.modules.xp = new NavXPSystem(this);
+
         this.client.login(config.DISCORD_TOKEN).then(() => 
             this.postLogin());
 
@@ -154,7 +162,18 @@ class Navalia {
             return msg.reply({ embed: errorEmbed });
         }
 
-        cmd.exec(this, this.client, msg, args);
+        // Executar o comando e ficar atento a possíveis erros
+        cmd.exec(this, this.client, msg, args)
+            .catch(error => {
+                console.error(
+                    `Oof, erro no comando ${cmd.name} (params <${args.join(", ") || "<nada>"}>) user ${msg.author.id} canal `+
+                    `${msg.channel.name}. Objeto:\n`,
+                    error
+                );
+
+                errorEmbed.setDescription(`💔 *Oof!*\n\nAlguma coisa interrompeu a execução do comando. O incidente foi gravado e, se for um bug, será corrigido. Desculpe!`);
+                msg.reply({ embed: errorEmbed });
+            });
     }
 
     /**
