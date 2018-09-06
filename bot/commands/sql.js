@@ -18,8 +18,14 @@ class SQLEvalCommand {
     async exec (Navalia, client, msg, args) {
         const sql = args.join(" ") || "SELECT * FROM guild_xp";
         const stmt = Navalia.db.prepare(sql);
-        const rows = stmt.all();
         let s = "<nada>";
+        let rows;
+
+        try {
+            rows = stmt.all();
+        } catch(ex) {
+            s = ex;
+        }
 
         if(rows) {
             const columns = Object.keys(rows[0]);
@@ -31,7 +37,7 @@ class SQLEvalCommand {
             });
             console.log(columns, values);
 
-            s = Table.table([ columns, ...values ])
+            s = Table.table([ columns, ...values ]);
         }
 
         msg.reply(`\`\`\`\n${s}\`\`\``);
