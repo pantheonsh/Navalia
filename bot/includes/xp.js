@@ -30,7 +30,7 @@ class NavXPSystem {
         try {
             return s.get(id).xp || 0;
         } catch (ex) {
-            console.error(`Erro ao ler o XP do usuário ${id}. Ele está no banco de dados?`, ex.stack);
+            if(!Navalia.isProduction()) console.error(`Erro ao ler o XP do usuário ${id}. Ele está no banco de dados?`, ex.stack);
             return 0;
         }
     }
@@ -99,7 +99,8 @@ class NavXPSystem {
 
     onMessage (msg) {
         const user = msg.author.id;
-        if(msg.system || msg.author.bot) return false;
+
+        if(msg.system || msg.author.bot || (msg.channel.nsfw && this.disableNSFWChannels)) return false;
 
         if(this.cooldown.has(user)) {
             let timeDiff = Date.now() - this.cooldown.get(user);

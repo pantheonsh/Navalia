@@ -35,7 +35,7 @@ class SQLEvalCommand {
                 let v = Object.values(row);
                 values.push(v);
             });
-            console.log(columns, values);
+            if(!Navalia.isProduction()) console.log(columns, values);
 
             s = Table.table([ columns, ...values ]);
         }

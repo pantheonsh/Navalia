@@ -88,14 +88,14 @@ class Navalia {
     onMessage (msg) {
         // só queremos lidar com mensagens que são enviadas por um humano
         if(msg.system || msg.author.bot) return;
-        console.log(`💬  ${msg.author.tag} ${colors.gray(msg.cleanContent)}`);
+        if(!this.isProduction()) console.log(`💬  ${msg.author.tag} ${colors.gray(msg.cleanContent)}`);
 
         if(!msg.content.startsWith(this.config.prefix)) return;
 
         const args = msg.content.split(" ");
         const cmd = args.shift().replace(this.config.prefix, "");
 
-        console.debug(`${colors.green(cmd)} ${colors.bgBlack.white(args.join(" "))}`);
+        if(!this.isProduction()) console.debug(`${colors.green(cmd)} ${colors.bgBlack.white(args.join(" "))}`);
 
         this.handleCommand(msg, cmd, args);
     }
@@ -174,6 +174,10 @@ class Navalia {
                 errorEmbed.setDescription(`💔 *Oof!*\n\nAlguma coisa interrompeu a execução do comando. O incidente foi gravado e, se for um bug, será corrigido. Desculpe!`);
                 msg.reply({ embed: errorEmbed });
             });
+    }
+
+    isProduction () {
+        return process.env.NODE_ENV === "production";
     }
 
     /**

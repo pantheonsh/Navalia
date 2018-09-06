@@ -36,9 +36,7 @@ class UtilFuncs {
         const search = Object.keys(replaceItems);
 
         search.forEach(s => {
-            console.log(str, s, replaceItems[s]);
             str = this.replaceAll(str, s, replaceItems[s]);
-            console.log(str);
         });
 
         return str;
