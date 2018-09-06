@@ -2,6 +2,8 @@ const Navalia = require("..").Navalia;
 const Discord = require("discord.js");
 const console = require("./navalialogger");
 
+const SEGUNDOS = 1000;
+
 class NavXPSystem {
     /**
      * Sistema de XP
@@ -10,6 +12,10 @@ class NavXPSystem {
     constructor (instance) {
         this.navalia = instance;
         this.DEFAULT_XP = 0;
+
+        this.disableNSFWChannels = true;
+        this.cooldownTime = 5*SEGUNDOS;
+        this.cooldown = new Map();
 
         this.navalia.client.on("message", msg => this.onMessage(msg));
     }
@@ -92,8 +98,16 @@ class NavXPSystem {
     }
 
     onMessage (msg) {
-        if(msg.system || msg.author.bot) return;
         const user = msg.author.id;
+        if(msg.system || msg.author.bot) return false;
+
+        if(this.cooldown.has(user)) {
+            let timeDiff = Date.now() - this.cooldown.get(user);
+
+            if(timeDiff < this.cooldownTime) return false;
+        }
+
+        this.cooldown.set(user, Date.now());
 
         const oldXP = this.getGlobalXP(user);
         const newXP = oldXP + 1;
