@@ -39,7 +39,8 @@ class RankCommand {
             let userxp = userdb.xp;
             let user = await client.fetchUser(userid);
             let image = await ImageUtils.createImageFromURL(user.displayAvatarURL);
-            userlist.push({ name: user.tag, image, xp: userxp });
+            // o nome mostrado é o nome sem caracteres não-ASCII
+            userlist.push({ name: user.tag.replace(/[^\x00-\x7F]/g, " "), image, xp: userxp });
         }
 
         for (let i = 0; i < userlist.length; i++) {
