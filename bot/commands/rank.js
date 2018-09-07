@@ -52,7 +52,7 @@ class RankCommand {
 
             // se i for ímpar, deixar um pouco mais escuro o fundo
             if(i % 2) {
-                ctx.fillStyle = "rgba(0, 0, 0, 0.7)";
+                ctx.fillStyle = "rgba(0, 0, 0, 0.2)";
                 ctx.fillRect(0, this.image.height * i, canvas.width, (this.image.height * i) + this.image.height);    
             }
 
