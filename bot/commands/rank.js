@@ -34,7 +34,7 @@ class RankCommand {
 
         for(let i = 0; i < usersOnDB.length; i++) {
             let userdb = usersOnDB[i];
-            console.log(userdb.id);
+
             let userid = userdb.id.toString();
             let userxp = userdb.xp;
             let user = await client.fetchUser(userid);
@@ -52,7 +52,7 @@ class RankCommand {
 
             // se i for ímpar, deixar um pouco mais escuro o fundo
             if(i % 2) {
-                ctx.fillStyle = "rgba(0, 0, 0, 0.2)";
+                ctx.fillStyle = "rgba(0, 0, 0, 0.1)";
                 ctx.fillRect(0, this.image.height * i, canvas.width, (this.image.height * i) + this.image.height);    
             }
 
