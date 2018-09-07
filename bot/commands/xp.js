@@ -11,7 +11,7 @@ class ProfileCommand {
         this.description = "Mostra o perfil de alguém ou de um usuário";
         this.example = "profile @NaN#2404"
         this.usage = "profile [@menção]";
-        this.aliases = ["xp"];
+        this.aliases = ["xp", "perfil"];
         this.user_must_be_owner = false; // somente os administradores do bot podem usar?
         this.guild_only = false; // só pode ser executado em uma guild?
         this.bot_permissions = []; // permissões que o bot precisa ter

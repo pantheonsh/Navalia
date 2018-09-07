@@ -1,4 +1,4 @@
-const google = require("google-search-scraper");
+const GoogleSearch = require("google-searcher");
 const errors = require("../includes/errors");
 
 module.exports = 
@@ -18,16 +18,21 @@ class GoogleCommand {
     async exec (Navalia, client, msg, args) {
         const query = args.join(" ").substring(0, 128);
         
-        let firstTime = true;
-        google.search({ query, lang: "pt", limit: 1 }, (err, url) => {
-            if(!firstTime) return;
-            if(err) {
-                throw new errors.CommandError(`Impossível completar a pesquisa!`, this, msg);
-                return;
-            }
-
-            firstTime = false;
-            msg.reply(url);
-        });
+        new GoogleSearch()
+        .lang("pt")
+        .host("www.google.com.br")
+        .query(query)
+        .exec()
+            .then(results => {
+                let r = results[0];
+                if(r) {
+                    msg.reply(r);
+                } else {
+                    msg.reply("Nada encontrado!")
+                }
+            })
+            .catch(err => {
+                throw err;
+            });
     }
 }
