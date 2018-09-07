@@ -18,7 +18,7 @@ class RankCommand {
         this.user_permissions = []; // permissões que o usuário precisa ter
 
         // inicialização do Canvas
-        this.canvas = NodeCanvas.createCanvas(275, 480);
+        this.canvas = NodeCanvas.createCanvas(275 * 2, 480 / 2);
         this.ctx = this.canvas.getContext("2d");
         this.ctx.font = "20px 'ProfileFont'";
         this.image = new NodeCanvas.Image();
@@ -43,24 +43,28 @@ class RankCommand {
         }
 
         for (let i = 0; i < userlist.length; i++) {
+            let basex = i > 4 ? (this.canvas.width / 2) : 0;
+            let basey = i % 5;
+
             let user = userlist[i];
 
             ctx.fillStyle = "rgba(255, 255, 255, 1)";
 
-            ctx.drawImage(user.image, 1, this.image.height * i + 1, 46, 46);
-            ctx.drawImage(this.image, 0, this.image.height * i);
+            ctx.drawImage(user.image, basex + 1, this.image.height * basey + 1, 46, 46);
+            ctx.drawImage(this.image, basex, this.image.height * basey);
 
             // se i for ímpar, deixar um pouco mais escuro o fundo
             if(i % 2) {
                 ctx.fillStyle = "rgba(0, 0, 0, 0.1)";
-                ctx.fillRect(0, this.image.height * i, canvas.width, (this.image.height * i) + this.image.height);    
+                ctx.fillRect(basex, this.image.height * basey, canvas.width, (this.image.height * basey) + this.image.height);    
             }
 
-            ctx.fillStyle = "rgba(70, 70, 70, 1)";
+            ctx.fillStyle = "rgba(30, 30, 30, 1)";
             this.ctx.font = "20px 'ProfileFont'";
-            ctx.fillText(user.name, 60, this.image.height * i + 25);
+            ctx.fillText(user.name, basex + 60, this.image.height * basey + 25);
             this.ctx.font = "15px 'ProfileFont'";
-            ctx.fillText(`XP TOTAL: ${user.xp}`, 60, this.image.height * i + 40);
+            ctx.fillStyle = "rgba(70, 70, 70, 1)";
+            ctx.fillText(`#${(i + 1).toString().padStart(2, "0")} XP TOTAL: ${user.xp}`, basex + 60, this.image.height * basey + 40);
         }
 
         this.canvas.toBuffer((err, buff) => {
