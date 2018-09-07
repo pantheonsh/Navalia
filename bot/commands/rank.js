@@ -18,11 +18,13 @@ class RankCommand {
         this.user_permissions = []; // permissões que o usuário precisa ter
 
         // inicialização do Canvas
-        this.canvas = NodeCanvas.createCanvas(275 * 2, 480 / 2);
-        this.ctx = this.canvas.getContext("2d");
-        this.ctx.font = "20px 'ProfileFont'";
         this.image = new NodeCanvas.Image();
         this.image.src = "./assets/images/rank_user_base.png";
+        this.top_image = new NodeCanvas.Image();
+        this.top_image.src = "./assets/images/rank_top.png";
+        this.canvas = NodeCanvas.createCanvas(this.image.width * 2, (this.image.height * 10 / 2) + this.top_image.height);
+        this.ctx = this.canvas.getContext("2d");
+        this.ctx.font = "20px 'ProfileFont'";
     }
 
     async exec (Navalia, client, msg, args) {
@@ -40,32 +42,42 @@ class RankCommand {
             let user = await client.fetchUser(userid);
             let image = await ImageUtils.createImageFromURL(user.displayAvatarURL);
             // o nome mostrado é o nome sem caracteres não-ASCII
-            userlist.push({ name: user.tag.replace(/[^\x00-\x7F]/g, " "), image, xp: userxp });
+            userlist.push({ name: user.username.replace(/[^\x00-\x7F]/g, " "), discrim: user.discriminator, image, xp: userxp });
         }
+
+        ctx.drawImage(this.top_image, 0, 0);
 
         for (let i = 0; i < userlist.length; i++) {
             let basex = i > 4 ? (this.canvas.width / 2) : 0;
-            let basey = i % 5;
+            let basey = (i % 5);
+            let toph = this.top_image.height;
 
             let user = userlist[i];
 
-            ctx.fillStyle = "rgba(255, 255, 255, 1)";
+            ctx.fillStyle = "rgba(0, 0, 0, 1)";
 
-            ctx.drawImage(user.image, basex + 1, this.image.height * basey + 1, 46, 46);
-            ctx.drawImage(this.image, basex, this.image.height * basey);
+            ctx.drawImage(user.image, basex + 1, this.image.height * basey + 8 + toph, 54, 54);
+            ctx.drawImage(this.image, basex, this.image.height * basey + toph);
 
             // se i for ímpar, deixar um pouco mais escuro o fundo
             if(i % 2) {
-                ctx.fillStyle = "rgba(0, 0, 0, 0.1)";
-                ctx.fillRect(basex, this.image.height * basey, canvas.width, (this.image.height * basey) + this.image.height);    
+                ctx.fillStyle = "rgba(255, 255, 255, 0.1)";
+                ctx.fillRect(basex, this.image.height * basey + toph, canvas.width, (this.image.height * basey) + this.image.height + toph);    
             }
 
-            ctx.fillStyle = "rgba(30, 30, 30, 1)";
-            this.ctx.font = "20px 'ProfileFont'";
-            ctx.fillText(user.name, basex + 60, this.image.height * basey + 25);
-            this.ctx.font = "15px 'ProfileFont'";
-            ctx.fillStyle = "rgba(70, 70, 70, 1)";
-            ctx.fillText(`#${(i + 1).toString().padStart(2, "0")} XP TOTAL: ${user.xp}`, basex + 60, this.image.height * basey + 40);
+            ctx.fillStyle = "rgba(255, 255, 255, 1)";
+            this.ctx.font = "27px 'ProfileFont'";
+            ctx.fillText(user.name, basex + 80, this.image.height * basey + 30 + toph);
+            let uwidth = ctx.measureText(user.name);
+
+            // discriminator
+            ctx.fillStyle = "rgba(200, 200, 200, 1)";
+            this.ctx.font = "19px 'ProfileFont'";
+            ctx.fillText(`#${user.discrim}`, basex + 80 + uwidth.width, this.image.height * basey + 30 + toph);
+
+            this.ctx.font = "24px 'ProfileFont'";
+            ctx.fillStyle = "rgba(160, 160, 160, 1)";
+            ctx.fillText(`#${(i + 1).toString().padStart(2, "0")} XP TOTAL: ${user.xp}`, basex + 80, this.image.height * basey + 60 + toph);
         }
 
         this.canvas.toBuffer((err, buff) => {
