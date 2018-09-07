@@ -2,6 +2,14 @@ const fetch = require("node-fetch");
 const canvas = require("canvas");
 
 class ImageUtils {
+    createImageFromURL (url) {
+        return new Promise(async (res) => {
+            let bufferimg = await this.getImageFromURL(url);
+            let image = await this.BufferToCanvasImage(bufferimg);
+            res(image);
+        });
+    }
+    
     /**
      * Baixa uma imagem de uma URL.
      * @param {String} url 
