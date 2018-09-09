@@ -30,7 +30,7 @@ class NavXPSystem {
         try {
             return s.get(id).xp || 0;
         } catch (ex) {
-            if(!Navalia.isProduction()) console.error(`Erro ao ler o XP do usuário ${id}. Ele está no banco de dados?`, ex.stack);
+            if(!this.navalia.isProduction()) console.error(`Erro ao ler o XP do usuário ${id}. Ele está no banco de dados?`, ex.stack);
             return 0;
         }
     }
