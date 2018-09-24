@@ -24,6 +24,7 @@ class NavDB extends SQLite {
 
         // NSA: Tabela para guardar a última notícia enviada
         this.prepare(`CREATE TABLE IF NOT EXISTS "news" (
+            "category" TEXT NOT NULL UNIQUE,
             "title"	TEXT NOT NULL
         );`).run();
     }

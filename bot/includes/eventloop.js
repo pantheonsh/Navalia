@@ -17,8 +17,7 @@ class EventLoop extends events.EventEmitter {
     }
 
     async processTasks () {
-        const news = await this.news_task.fetchNews();
-        this.news_task.send(news[0]);
+        await this.news_task.main();
     }
 }
 
