@@ -21,6 +21,11 @@ class NavDB extends SQLite {
             "xp"	    INTEGER,
             UNIQUE (guild_id, user_id)
         );`).run();
+
+        // NSA: Tabela para guardar a última notícia enviada
+        this.prepare(`CREATE TABLE IF NOT EXISTS "news" (
+            "title"	TEXT NOT NULL
+        );`).run();
     }
 }
 

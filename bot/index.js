@@ -79,6 +79,8 @@ class Navalia {
      */
     onReady () {
         console.log("✔️  Login feito!");
+
+        this.eventLoop = new NavaliaEventLoop(this, 10);
     }
 
     /**
