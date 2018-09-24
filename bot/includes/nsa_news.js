@@ -20,7 +20,7 @@ class NSA_News {
             { id: "business", channel: this.config.nsa_news_channel_business, endpoint: `https://newsapi.org/v2/top-headlines?category=business&country=br&apiKey=${this.api_key}` },
             { id: "science", channel: this.config.nsa_news_channel_science, endpoint: `https://newsapi.org/v2/top-headlines?category=science&country=br&apiKey=${this.api_key}` },
             { id: "health", channel: this.config.nsa_news_channel_health, endpoint: `https://newsapi.org/v2/top-headlines?category=health&country=br&apiKey=${this.api_key}` },
-            { id: "sports", channel: this.config.nsa_news_channel_sports, endpoint: `https://newsapi.org/v2/top-headlines?category=sports&country=br&apiKey=${this.api_key}` }
+            /* { id: "sports", channel: this.config.nsa_news_channel_sports, endpoint: `https://newsapi.org/v2/top-headlines?category=sports&country=br&apiKey=${this.api_key}` } */
         ]
     }
 
