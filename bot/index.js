@@ -39,7 +39,7 @@ class Navalia {
         this.client.Navalia = this;
 
         // carregar os comandos
-        this.commands = require("./includes/commandLoader")("./commands/");
+        this.commands = require("./includes/commandLoader")(path.join(__dirname, "commands/"));
         
         this.modules = {};
         this.modules.xp = new NavXPSystem(this);
@@ -197,7 +197,5 @@ class Navalia {
 
 const clientData = require("./data.json");
 const navInst = new Navalia(process.env, clientData);
-
-require("./includes/http_server");
 
 module.exports = { Navalia }

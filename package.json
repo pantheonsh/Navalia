@@ -13,9 +13,14 @@
         "google-search-scraper": "^0.1.0",
         "google-searcher": "^1.0.0",
         "mathjs": "^5.0.4",
+        "module-alias": "^2.1.0",
         "moment": "^2.22.2",
         "mongoose": "^5.2.4",
         "node-fetch": "^2.2.0",
         "table": "^5.0.2"
+    },
+    "_moduleAliases": {
+        "@comandos": "bot/commands",
+        "@includes": "bot/includes"
     }
 }

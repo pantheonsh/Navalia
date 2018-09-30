@@ -1,8 +1,9 @@
 const Discord = require("discord.js");
 const NodeCanvas = require("canvas");
 const ImageUtils = require("../includes/imageUtils");
+const path = require("path");
 
-NodeCanvas.registerFont("./assets/fonts/Topic.ttf", { "family": "ProfileFont" });
+NodeCanvas.registerFont(path.join(__dirname, "../assets/fonts/Topic.ttf"), { "family": "ProfileFont" });
 
 module.exports = 
 class RankCommand {
@@ -19,9 +20,9 @@ class RankCommand {
 
         // inicialização do Canvas
         this.image = new NodeCanvas.Image();
-        this.image.src = "./assets/images/rank_user_base.png";
+        this.image.src = path.resolve(__dirname, "../assets/images/rank_user_base.png");
         this.top_image = new NodeCanvas.Image();
-        this.top_image.src = "./assets/images/rank_top.png";
+        this.top_image.src = path.resolve(__dirname, "../assets/images/rank_top.png");
         this.canvas = NodeCanvas.createCanvas(this.image.width * 2, (this.image.height * 10 / 2) + this.top_image.height);
         this.ctx = this.canvas.getContext("2d");
         this.ctx.font = "20px 'ProfileFont'";

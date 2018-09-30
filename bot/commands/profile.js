@@ -1,8 +1,9 @@
 const Discord = require("discord.js");
 const NodeCanvas = require("canvas");
 const ImageUtils = require("../includes/imageUtils");
+const path = require("path");
 
-NodeCanvas.registerFont("./assets/fonts/Topic.ttf", { "family": "ProfileFont" });
+NodeCanvas.registerFont(path.join(__dirname, "../assets/fonts/Topic.ttf"), { "family": "ProfileFont" });
 
 module.exports = 
 class ProfileCommand {
@@ -22,7 +23,7 @@ class ProfileCommand {
         this.ctx = this.canvas.getContext("2d");
         this.ctx.font = "20px 'ProfileFont'";
         this.image = new NodeCanvas.Image();
-        this.image.src = "./assets/images/profile_bg.png";
+        this.image.src = path.resolve(__dirname, "../assets/images/profile_bg.png");
     }
 
     async exec (Navalia, client, msg, args) {
