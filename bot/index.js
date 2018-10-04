@@ -80,7 +80,7 @@ class Navalia {
     onReady () {
         console.log("✔️  Login feito!");
 
-        this.eventLoop = new NavaliaEventLoop(this, 10);
+        this.eventLoop = new NavaliaEventLoop(this, 120);
     }
 
     /**
