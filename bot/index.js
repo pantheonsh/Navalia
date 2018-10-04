@@ -182,6 +182,12 @@ class Navalia {
         return process.env.NODE_ENV === "production";
     }
 
+    getCommandsAsArray () {
+        let cmds = [];
+        this.commands.notaliases.forEach(cmd => cmds.push({ name: cmd.name, description: cmd.description, example: cmd.example, usage: cmd.usage }));
+        return cmds;
+    }
+
     /**
      * Lida com possíveis erros na conexão.
      * @param {Error} error 
