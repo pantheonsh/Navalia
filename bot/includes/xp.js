@@ -17,6 +17,8 @@ class NavXPSystem {
         this.cooldownTime = 5*SEGUNDOS;
         this.cooldown = new Map();
 
+        this.exclude_channels = ["326832094053400577", "360946965716008963"];
+
         this.navalia.client.on("message", msg => this.onMessage(msg));
     }
 
@@ -100,7 +102,7 @@ class NavXPSystem {
     onMessage (msg) {
         const user = msg.author.id;
 
-        if(msg.system || msg.author.bot || (msg.channel.nsfw && this.disableNSFWChannels)) return false;
+        if(msg.system || msg.author.bot || this.exclude_channels.includes(msg.channel.id) || (msg.channel.nsfw && this.disableNSFWChannels)) return false;
 
         if(this.cooldown.has(user)) {
             let timeDiff = Date.now() - this.cooldown.get(user);
